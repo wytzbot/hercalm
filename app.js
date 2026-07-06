@@ -178,7 +178,7 @@ function saveMood(){
 function loadMoods(){
   const moods=JSON.parse(localStorage.getItem('hercalm_moods')||'[]');
   const emojis=['','😭','😔','😐','🙂','😊'];
-  document.getElement  document.getElementById('moodHistory').innerHTML=moods.length?moods.slice(0,7).map(m=>
+    document.getElementById('moodHistory').innerHTML=moods.length?moods.slice(0,7).map(m=>
     `<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #F3F4F6">
       <span>${m.date}</span><span style="font-size:20px">${emojis[m.mood]}</span>
     </div>`
