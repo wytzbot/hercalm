@@ -1,4 +1,4 @@
-const CACHE='hercalm-v2';
+const CACHE='hercalm-v3'; // Changed to v3 to force update
 const FILES=['./','./index.html','./app.js','./manifest.json','./privacy.html'];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES))));
 self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request))));
