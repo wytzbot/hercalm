@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HerCalm - Period Cramp Relief Toolkit</title>
+  <meta name="theme-color" content="#EC4899">
+  <meta name="description" content="5 doctor-approved tools + food guide to naturally relieve period cramps. Track, breathe, flow, and feel better.">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <style>
+    :root{
+      --pink:#EC4899; --pink-light:#FDF2F8; --pink-dark:#BE185D;
+      --purple:#A855F7; --gray:#6B7280; --dark:#1F2937;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+    body{background:linear-gradient(180deg,var(--pink-light) 0%,#FFFFFF 200px);color:var(--dark);line-height:1.6}
+  .container{max-width:480px;margin:0 auto;padding:16px;min-height:100vh}
+  .hidden{display:none!important}
+    h1{color:var(--pink-dark);font-size:28px;font-weight:700;text-align:center;margin:8px 0 4px}
+    h2{color:var(--pink-dark);font-size:22px;font-weight:600;margin:16px 0 12px}
+    h3{color:var(--dark);font-size:18px;font-weight:600;margin:16px 0 8px}
+  .sub{color:var(--gray);text-align:center;font-size:14px;margin-bottom:24px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0}
+  .tool-card{background:white;border-radius:20px;padding:20px;text-align:center;box-shadow:0 2px 8px rgba(236,72,153,0.1);cursor:pointer;transition:all 0.2s;border:2px solid transparent}
+  .tool-card:active{transform:scale(0.97);border-color:var(--pink)}
+  .tool-card span{font-size:36px;display:block;margin-bottom:8px}
+  .tool-card strong{display:block;color:var(--dark);font-size:15px;margin-bottom:4px}
+  .tool-card p{font-size:12px;color:var(--gray)}
+  .btn{background:var(--pink);color:white;border:0;padding:14px 24px;border-radius:12px;font-size:16px;font-weight:600;width:100%;cursor:pointer;margin:8px 0}
+  .btn:active{background:var(--pink-dark)}
+  .btn-secondary{background:white;color:var(--pink);border:2px solid var(--pink)}
+  .back-nav{display:flex;align-items:center;gap:8px;margin-bottom:16px;cursor:pointer;color:var(--pink);font-weight:600}
+  .card{background:white;border-radius:16px;padding:20px;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
+  .timer{font-size:72px;text-align:center;margin:32px 0;font-weight:200;color:var(--pink-dark)}
+  .progress-bar{height:8px;background:#F3F4F6;border-radius:8px;overflow:hidden;margin:16px 0}
+  .progress{height:100%;background:var(--pink);width:0%;transition:width 1s}
+  .article-list li{margin:12px 0;padding-left:24px;position:relative}
+  .article-list li:before{content:"✓";position:absolute;left:0;color:var(--pink);font-weight:bold}
+  .article-list.no:before{content:"✗";color:#EF4444}
+  .affiliate{background:#FEF3C7;border:2px dashed #F59E0B;border-radius:12px;padding:16px;margin:20px 0;text-align:center}
+  .affiliate a{color:var(--pink-dark);font-weight:700;text-decoration:none}
+  .samsung-ad{margin:20px 0;text-align:center}
+  .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:white;border-top:1px solid #F3F4F6;display:flex;justify-content:space-around;padding:12px 0;max-width:480px;margin:0 auto}
+  .nav-item{color:var(--gray);font-size:11px;text-align:center;cursor:pointer}
+  .nav-item.active{color:var(--pink);font-weight:600}
+  .nav-item span{display:block;font-size:20px;margin-bottom:2px}
+    input[type="range"]{width:100%;accent-color:var(--pink)}
+    textarea{width:100%;border:2px solid #F3F4F6;border-radius:8px;padding:12px;font-family:inherit}
+   .badge{display:inline-block;background:var(--pink-light);color:var(--pink-dark);padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;margin:4px 4px 4px 0}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- HOME -->
+    <div id="home">
+      <h1>HerCalm</h1>
+      <p class="sub">5 gentle tools to ease your period, naturally</p>
+
+      <div class="grid">
+        <div class="tool-card" onclick="nav('yoga')">
+          <span>🧘‍♀️</span>
+          <strong>Yoga Flow</strong>
+          <p>7-min cramp relief</p>
+        </div>
+        <div class="tool-card" onclick="nav('breathe')">
+          <span>🌸</span>
+          <strong>Calm Breathing</strong>
+          <p>4-7-8 technique</p>
+        </div>
+        <div class="tool-card" onclick="nav('heat')">
+          <span>🔥</span>
+          <strong>Heat Therapy</strong>
+          <p>20-min safe timer</p>
+        </div>
+        <div class="tool-card" onclick="nav('points')">
+          <span>💆‍♀️</span>
+          <strong>Pressure Points</strong>
+          <p>Instant acupressure</p>
+        </div>
+      </div>
+
+      <div class="tool-card" onclick="nav('tracker')" style="margin-bottom:14px">
+        <span>📊</span>
+        <strong>Smart Pain Tracker</strong>
+        <p>Log symptoms + get predictions</p>
+      </div>
+
+      <div class="tool-card" onclick="nav('guide')" style="border-color:var(--purple)">
+        <span>📖</span>
+        <strong>Cramp-Free Guide</strong>
+        <p>Do's, Don'ts & Foods that help</p>
+      </div>
+
+      <!-- Samsung Ads Only -->
+      <div class="samsung-ad" id="samsungAdSlot">
+        <!-- Ad code goes here. Hidden on Amazon builds -->
+      </div>
+
+      <p style="text-align:center;font-size:12px;margin:32px 0;color:var(--gray)">
+        Made with care • <a href="privacy.html" style="color:var(--pink)">Privacy</a> • Not medical advice
+      </p>
+      <div style="height:80px"></div>
+    </div>
+
+    <!-- YOGA TOOL -->
+    <div id="yoga" class="hidden">
+      <div class="back-nav" onclick="nav('home')">← Back to Tools</div>
+      <h2>Gentle Yoga for Cramps</h2>
+      <p class="sub">Hold each pose. Breathe deep. Let your belly soften.</p>
+
+      <div class="card">
+        <div class="timer" id="yogaTimer">6:00</div>
+        <div class="progress-bar"><div class="progress" id="yogaProgress"></div></div>
+        <h3 id="poseName">Ready to Start?</h3>
+        <p id="poseDesc">Find a quiet space. Grab a pillow or mat. We'll flow for 6 minutes through poses that release pelvic tension.</p>
+      </div>
+
+      <button class="btn" id="yogaBtn" onclick="toggleYoga()">Start 6-Min Flow</button>
+
+      <div class="affiliate">
+        <strong>Need a yoga mat?</strong><br>
+        <a href="#" onclick="trackAffiliate('yoga-mat')">Shop non-slip mats on Amazon →</a>
+      </div>
+    </div>
+
+    <!-- BREATHING TOOL -->
+    <div id="breathe" class="hidden">
+      <div class="back-nav" onclick="nav('home')">← Back to Tools</div>
+      <h2>4-7-8 Calming Breath</h2>
+      <p class="sub">Used by nurses to reduce period anxiety + pain perception</p>
+
+      <div class="card" style="text-align:center;padding:40px 20px">
+        <div class="timer" id="breatheTimer" style="font-size:48px">Ready</div>
+        <p id="breatheInstruction" style="color:var(--gray);margin-top:16px">Tap start. Follow the rhythm.</p>
+        <div class="progress-bar" style="margin-top:32px"><div class="progress" id="breatheProgress"></div></div>
+      </div>
+
+      <button class="btn" id="breatheBtn" onclick="toggleBreathe()">Start Breathing</button>
+
+      <div class="card">
+        <h3>Why it works</h3>
+        <p style="font-size:14px;color:var(--gray)">This pattern activates your vagus nerve. It tells your body "we're safe" and lowers prostaglandins — the chemicals that cause cramps.</p>
+      </div>
+    </div>
+
+    <!-- HEAT TOOL -->
+    <div id="heat" class="hidden">
+      <div class="back-nav" onclick="nav('home')">← Back to Tools</div>
+      <h2>Heat Therapy Timer</h2>
+      <p class="sub">20 minutes on, 20 minutes off. Safest way to use heat for cramps.</p>
+
+      <div class="card">
+        <div class="timer" id="heatTimer">20:00</div>
+        <p style="text-align:center;color:var(--gray)">Never sleep with heat pads. Set this timer.</p>
+      </div>
+
+      <button class="btn" id="heatBtn" onclick="toggleHeat()">Start 20-Min Heat</button>
+
+      <div class="affiliate">
+        <strong>Need a heat pad?</strong><br>
+        <a href="#" onclick="trackAffiliate('heat-pad')">See top-rated microwavable pads →</a>
+      </div>
+
+      <div class="card">
+        <h3>Safety First</h3>
+        <p style="font-size:14px;color:var(--gray)">Wrap heat pad in a towel. Place on lower belly or back. If skin feels too hot, remove immediately. This timer reminds you to take breaks.</p>
+      </div>
+    </div>
+
+    <!-- ACUPRESSURE TOOL -->
+    <div id="points" class="hidden">
+      <div class="back-nav" onclick="nav('home')">← Back to Tools</div>
+      <h2>Pressure Points for Relief</h2>
+      <p class="sub">Press firmly for 1-2 minutes. Breathe deep. Release.</p>
+
+      <div class="card">
+        <h3>SP6 - "Three Yin Intersection"</h3>
+        <p style="font-size:14px;color:var(--gray);margin:8px 0">Find it: 4 finger-widths above your inner ankle bone, just behind the shin bone.</p>
+        <div class="badge">Reduces cramps</div><div class="badge">Balances hormones</div>
+        <button class="btn btn-secondary" style="margin-top:12px" onclick="startPointTimer(120, 'sp6')">Start 2-Min Timer</button>
+        <div class="timer" id="sp6Timer" style="font-size:32px;margin:16px 0;display:none">2:00</div>
+      </div>
+
+      <div class="card">
+        <h3>LI4 - "Joining Valley"</h3>
+        <p style="font-size:14px;color:var(--gray);margin:8px 0">Find it: The soft web between thumb and index finger. Avoid if pregnant.</p>
+        <div class="badge">Instant pain relief</div><div class="badge">Headache + cramps</div>
+        <button class="btn btn-secondary" style="margin-top:12px" onclick="startPointTimer(60, 'li4')">Start 1-Min Timer</button>
+        <div class="timer" id="li4Timer" style="font-size:32px;margin:16px 0;display:none">1:00</div>
+      </div>
+    </div>
+
+    <!-- TRACKER TOOL -->
+    <div id="tracker" class="hidden">
+      <div class="back-nav" onclick="nav('home')">← Back to Tools</div>
+      <h2>Pain & Period Tracker</h2>
+      <p class="sub">Your body talks in patterns. Let's listen.</p>
+
+      <div class="card">
+        <h3>Log Today</h3>
+        <label style="display:block;margin:12px 0">Pain Level: <span id="painValue">5</span>/10</label>
+        <input type="range" min="1" max="10" value="5" id="painLevel" oninput="document.getElementById('painValue').textContent=this.value">
+
+        <label style="display:block;margin:16px 0 8px">Symptoms:</label>
+        <div>
+          <span class="badge" onclick="toggleSymptom(this)">Cramps</span>
+          <span class="badge" onclick="toggleSymptom(this)">Bloating</span>
+          <span class="badge" onclick="toggleSymptom(this)">Headache</span>
+          <span class="badge" onclick="toggleSymptom(this)">Fatigue</span>
+          <span class="badge" onclick="toggleSymptom(this)">Back Pain</span>
+        </div>
+
+        <label style="display:block;margin:16px 0 8px">Notes:</label>
+        <textarea id="painNote" rows="2" placeholder="Ate chocolate, helped... or made worse?"></textarea>
+
+        <button class="btn" onclick="saveLog()">Save Today's Log</button>
+      </div>
+
+      <div class="card">
+        <h3>Your History</h3>
+        <div id="historyList" style="font-size:14px;color:var(--gray)">No logs yet. Start tracking to see patterns.</div>
+      </div>
+    </div>
+
+    <!-- GUIDE ARTICLE -->
+    <div id="guide" class="hidden">
+      <div class="back-nav" onclick="nav('home')">← Back to Tools</div>
+      <h2>The Cramp-Free Guide</h2>
+      <p class="sub">Written by women, for women. What actually helps.</p>
+
+      <div class="card">
+        <h3>Do This During Your Period</h3>
+        <ul class="article-list">
+          <li><strong>Move gently:</strong> Walking or yoga boosts blood flow and cuts prostaglandins.</li>
+          <li><strong>Heat therapy:</strong> 20 mins on your lower belly. As effective as ibuprofen for many.</li>
+          <li><strong>Magnesium-rich foods:</strong> Dark chocolate, almonds, spinach relax the uterus.</li>
+          <li><strong>Omega-3s:</strong> Salmon, chia seeds, walnuts fight inflammation.</li>
+          <li><strong>Stay hydrated:</strong> Dehydration makes cramps worse. Aim for 2L water.</li>
+          <li><strong>Ginger tea:</strong> 1g of ginger powder = 400mg ibuprofen in studies.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Avoid These Cramp Triggers</h3>
+        <ul class="article-list">
+          <li class="no"><strong>Excess caffeine:</strong> 1 cup OK. 3+ cups constrict blood vessels.</li>
+          <li class="no"><strong>Salty snacks:</strong> Chips + bloating = more pressure on cramps.</li>
+          <li class="no"><strong>Alcohol:</strong> Dehydrates and worsens mood swings.</li>
+          <li class="no"><strong>Skipping meals:</strong> Low blood sugar = more pain sensitivity.</li>
+          <li class="no"><strong>Tight waistbands:</strong> Wear high-waist, loose pants. Your uterus needs space.</li>
+        </ul>
+      </div>
+
+      <div class="affiliate">
+        <strong>Period Kit Essentials</strong><br>
+        <a href="#" onclick="trackAffiliate('period-kit')">Shop heating pads, teas & supplements →</a>
+      </div>
+
+      <div class="card">
+        <h3>When to See a Doctor</h3>
+        <p style="font-size:14px;color:var(--gray)">This app helps with normal period pain. Call your doctor if: pain stops your life for 2+ days, bleeding soaks a pad in 1 hour, or you have fever/chills. You know your body best.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <div class="nav-item active" onclick="nav('home')"><span>🏠</span>Home</div>
+    <div class="nav-item" onclick="nav('tracker')"><span>📊</span>Tracker</div>
+    <div class="nav-item" onclick="nav('guide')"><span>📖</span>Guide</div>
+    <div class="nav-item" onclick="nav('yoga')"><span>🧘‍♀️</span>Tools</div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+  </html>
