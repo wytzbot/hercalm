@@ -1,5 +1,5 @@
 // CONFIG
-const IS_SAMSUNG_BUILD = true; // Set false for Amazon to hide ads
+const IS_SAMSUNG_BUILD = true;
 
 // SWEET DAILY MESSAGES
 const SWEET_MESSAGES = [
@@ -36,13 +36,14 @@ const FAQS = [
   {q:"Will cramps get better with age?",a:"Often yes. After 1st pregnancy or in your 30s, many women report less pain. Secondary causes can worsen it — track & check."}
 ];
 
-// NAVIGATION
+// NAVIGATION - FIXED
 function nav(page) {
   document.querySelectorAll('.container > div').forEach(d => d.classList.add('hidden'));
-  document.getElementById(page).classList.remove('hidden');
+  const target = document.getElementById(page);
+  if(target) target.classList.remove('hidden');
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   const navMap = {home:0,tracker:1,guide:2,mood:3};
-  if(navMap[page]!==undefined) document.querySelectorAll('.nav-item')[navMap[page]].classList.add('active');
+  if(navMap!== undefined) document.querySelectorAll('.nav-item')[navMap].classList.add('active');
   window.scrollTo(0,0);
 }
 
@@ -57,11 +58,11 @@ function trackAffiliate(product) {
   window.open(links[product] || '#', '_blank');
 }
 
-// DAILY SWEET MESSAGE - Shows once per 24hrs
+// DAILY SWEET MESSAGE
 function checkDailyMessage() {
   const lastShown = localStorage.getItem('hercalm_lastMsg');
   const now = Date.now();
-  if (!lastShown || now - lastShown > 86400000) { // 24hrs
+  if (!lastShown || now - lastShown > 86400000) {
     const msg = SWEET_MESSAGES[Math.floor(Math.random() * SWEET_MESSAGES.length)];
     document.getElementById('messageText').textContent = msg;
     document.getElementById('dailyMessage').classList.remove('hidden');
@@ -131,7 +132,7 @@ function startPointTimer(seconds, id) {
   },1000);
 }
 
-// TRACKER
+// TRACKER - FIXED
 let selectedSymptoms=[];
 function toggleSymptom(el){
   el.classList.toggle('active');
@@ -143,7 +144,9 @@ function saveLog(){
   const logs=JSON.parse(localStorage.getItem('hercalm_logs')||'[]');
   logs.unshift({date:new Date().toLocaleDateString(),level:document.getElementById('painLevel').value,symptoms:selectedSymptoms,note:document.getElementById('painNote').value});
   localStorage.setItem('hercalm_logs',JSON.stringify(logs.slice(0,60)));
-  document.getElementById('painNote').value='';selectedSymptoms=[];document.querySelectorAll('#symptomBadges.badge').forEach(b=>b.classList.remove('active'));
+  document.getElementById('painNote').value='';
+  selectedSymptoms=[];
+  document.querySelectorAll('#symptomBadges.badge').forEach(b=>b.classList.remove('active'));
   loadHistory(); alert('Saved! 💗');
 }
 function loadHistory(){
@@ -153,7 +156,7 @@ function loadHistory(){
   ).join(''):'No logs yet.';
 }
 
-// MOOD CHECK - NEW TOOL
+// MOOD CHECK
 let currentMood=0;
 function setMood(val,el){
   currentMood=val;
@@ -166,7 +169,7 @@ function saveMood(){
   if(!currentMood){alert('Tap an emoji first!');return}
   const moods=JSON.parse(localStorage.getItem('hercalm_moods')||'[]');
   moods.unshift({date:new Date().toLocaleDateString(),mood:currentMood});
-  localStorage.setItem('hercalm_moods',  localStorage.setItem('hercalm_moods',JSON.stringify(moods.slice(0,30)));
+  localStorage.setItem('hercalm_moods',JSON.stringify(moods.slice(0,30)));
   loadMoods();
   document.querySelectorAll('.mood-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('moodMessage').textContent='Saved! Check your pattern below 💗';
@@ -175,23 +178,22 @@ function saveMood(){
 function loadMoods(){
   const moods=JSON.parse(localStorage.getItem('hercalm_moods')||'[]');
   const emojis=['','😭','😔','😐','🙂','😊'];
-  document.getElementById('moodHistory').innerHTML=moods.length?moods.slice(0,7).map(m=>
+  document.getElement  document.getElementById('moodHistory').innerHTML=moods.length?moods.slice(0,7).map(m=>
     `<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #F3F4F6">
       <span>${m.date}</span><span style="font-size:20px">${emojis[m.mood]}</span>
     </div>`
   ).join(''):'No mood logs yet.';
 }
 
-// CALM SOUNDS - NEW TOOL
+// CALM SOUNDS - FIXED
 let soundInterval, soundSec=0;
 function playSound(type) {
   clearInterval(soundInterval);
+  document.querySelectorAll('#sounds.timer').forEach(t=>t.style.display='none');
   const durations={rain:300,waves:300,white:600};
   soundSec=durations[type];
   const timerEl=document.getElementById(type+'Timer');
   timerEl.style.display='block';
-  document.querySelectorAll('#sounds.timer').forEach(t=>{if(t!==timerEl)t.style.display='none'});
-
   soundInterval=setInterval(()=>{
     soundSec--;
     timerEl.textContent=`${Math.floor(soundSec/60)}:${String(soundSec%60).padStart(2,'0')}`;
@@ -201,9 +203,6 @@ function playSound(type) {
       setTimeout(()=>timerEl.style.display='none',3000);
     }
   },1000);
-
-  // Vibrate pattern if supported - feels like actual sound pulse
-  if(navigator.vibrate) navigator.vibrate([200,100,200]);
 }
 
 // FAQ SYSTEM
@@ -223,21 +222,16 @@ function loadFAQs(){
   ).join('');
 }
 
-// INIT - Runs on app load
+// INIT
 document.addEventListener('DOMContentLoaded',()=>{
   loadHistory();
   loadMoods();
   loadFAQs();
   checkDailyMessage();
-
-  // Hide Samsung ads if Amazon build
   if(!IS_SAMSUNG_BUILD) document.getElementById('samsungAdSlot').style.display='none';
-
-  // Register service worker
   if('serviceWorker' in navigator){
     navigator.serviceWorker.register('sw.js').catch(()=>{});
   }
 });
 
-// PWA Install prompt
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();window.deferredPrompt=e;});
