@@ -229,9 +229,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   loadFAQs();
   checkDailyMessage();
   if(!IS_SAMSUNG_BUILD) document.getElementById('samsungAdSlot').style.display='none';
-  if('serviceWorker' in navigator){
-    navigator.serviceWorker.register('sw.js').catch(()=>{});
-  }
+  
 });
 
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();window.deferredPrompt=e;});
