@@ -235,3 +235,15 @@ document.addEventListener('DOMContentLoaded',()=>{
 });
 
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();window.deferredPrompt=e;});
+function resetAllData() {
+  const confirm1 = confirm('Delete all period logs and mood data? This cannot be undone.');
+  if(!confirm1) return;
+  const confirm2 = confirm('Are you 100% sure? All data will be erased from this device.');
+  if(!confirm2) return;
+  localStorage.removeItem('hercalm_logs');
+  localStorage.removeItem('hercalm_moods');
+  localStorage.removeItem('hercalm_lastMsg');
+  loadHistory();
+  loadMoods();
+  alert('All data deleted. Your device is clean 💗');
+}
