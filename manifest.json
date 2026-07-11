@@ -2,7 +2,7 @@
   "name": "HerCalm - Period Relief Tools",
   "short_name": "HerCalm",
   "description": "8 gentle tools + 20 expert answers for period cramps, PMS & stress relief",
-  "start_url": "./index.html",
+  "start_url": "https://wytzbot.github.io/monygist-/",
   "display": "standalone",
   "background_color": "#FDF2F8",
   "theme_color": "#EC4899",
